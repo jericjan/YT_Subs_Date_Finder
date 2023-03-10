@@ -12,7 +12,7 @@ document.querySelector('#authorizeButton').onclick = function () {
     client.requestAccessToken();
 };
 
-async function getResponse() {
+async function getResponse(forChannelID) {
     if (window.yt_access_token == "") {
         alert("You have not authorized yet lmao")
     } else {
@@ -25,9 +25,15 @@ async function getResponse() {
         const elements = new Set();
         while (running == true) {
             var url = "https://content-youtube.googleapis.com/youtube/v3/subscriptions?channelId=UCJ8IcSP4kUl8VTedFlHkM4A&part=contentDetails%2C%20snippet&maxResults=50"
+
+            if (forChannelID != undefined){
+                url += "&forChannelId=" + forChannelID
+            }            
+
             if (pageToken != "") {
                 url += pageToken
             }
+
             var response = await fetch(url, {
                 "headers": {
                     "authorization": "Bearer " + window.yt_access_token,
@@ -91,7 +97,7 @@ async function getResponse() {
 
         var sortedSet = new Set(sortedElements);
         document.querySelector("ul").append(...sortedSet);
-        
+
         // var myblob = new Blob([responseText], {
         //     type: 'text/plain;charset=utf8'
         // });
@@ -105,4 +111,9 @@ async function getResponse() {
 
 document.querySelector('#getSubsButton').onclick = function () {
     getResponse()
+}
+
+document.querySelector('#searchChannelsBtn').onclick = function() {
+    var query = document.querySelector('#channelSearchBar').value
+    getResponse(query)
 }
