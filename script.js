@@ -22,7 +22,7 @@ async function getResponse() {
         var responseText = ""
         var foundChannels = 0
         document.querySelector("#channels").innerHTML = ""
-        
+
         while (running == true) {
             var url = "https://content-youtube.googleapis.com/youtube/v3/subscriptions?channelId=UCJ8IcSP4kUl8VTedFlHkM4A&part=contentDetails%2C%20snippet&maxResults=50"
             if (pageToken != "") {
@@ -54,6 +54,8 @@ async function getResponse() {
                 element.querySelector(".channelDate").textContent = new Date(date);
                 element.querySelector(".pfpDiv > .pfp").src = pfp;
                 element.querySelector(".channelContainer").href = "https://www.youtube.com/channel/" + channelID
+                element.querySelector(".channelContainer").target = "_blank"
+                
                 elements.add(element);
                 
 
