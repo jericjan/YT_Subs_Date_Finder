@@ -37,9 +37,9 @@ async function getResponse() {
             var jsoned = await response.json()
             var totalSubs = jsoned['pageInfo']['totalResults']
 
-            
+
             const template = document.getElementById("li_template");
-            
+
             for (var x of jsoned['items']) {
                 var title = x['snippet']['title']
                 var date = x['snippet']['publishedAt']
@@ -57,7 +57,7 @@ async function getResponse() {
                 element.querySelector(".channelContainer").target = "_blank"
 
                 elements.add(element);
-                
+
 
 
                 // channelName = document.createElement("h1")
@@ -68,15 +68,7 @@ async function getResponse() {
                 // document.querySelector("body").appendChild(subDate)
             }
 
-            function elemToDate(elem){
-                return new Date(elem.querySelector(".channelDate").textContent)
-            }
 
-            var sortedElements = Array.from(elements).sort((a, b) => {
-                return elemToDate(a) - elemToDate(b)
-            });
-            var sortedSet = new Set(sortedElements);
-            document.querySelector("ul").append(...sortedSet);
 
             foundChannels += jsoned['items'].length
             document.querySelector("#progress").innerHTML = `${foundChannels} / ${totalSubs}`
@@ -88,6 +80,18 @@ async function getResponse() {
             }
 
         }
+
+        function elemToDate(elem) {
+            return new Date(elem.querySelector(".channelDate").textContent)
+        }
+
+        var sortedElements = Array.from(elements).sort((a, b) => {
+            return elemToDate(a) - elemToDate(b)
+        });
+
+        var sortedSet = new Set(sortedElements);
+        document.querySelector("ul").append(...sortedSet);
+        
         // var myblob = new Blob([responseText], {
         //     type: 'text/plain;charset=utf8'
         // });
