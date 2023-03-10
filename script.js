@@ -51,7 +51,7 @@ async function getResponse() {
                 element.querySelector(".channelTitle").textContent = title;
                 element.querySelector(".channelDate").textContent = new Date(date);
                 element.querySelector(".pfpDiv > .pfp").src = pfp;
-                element.querySelector(".channelContainer.").href = "https://www.youtube.com/channel/" + channelID
+                element.querySelector(".channelContainer").href = "https://www.youtube.com/channel/" + channelID
                 elements.add(element);
                 
 
