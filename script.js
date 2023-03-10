@@ -20,6 +20,7 @@ async function getResponse() {
         var running = true
         var pageToken = ""
         var responseText = ""
+        var foundChannels = 0
         while (running == true) {
             var url = "https://content-youtube.googleapis.com/youtube/v3/subscriptions?channelId=UCJ8IcSP4kUl8VTedFlHkM4A&part=contentDetails%2C%20snippet&maxResults=50"
             if (pageToken != "") {
@@ -32,12 +33,22 @@ async function getResponse() {
                 "method": "GET",
             })
             var jsoned = await response.json()
+            var totalSubs = jsoned['pageInfo']['totalResults']
             for (var x of jsoned['items']) {
                 var title = x['snippet']['title']
                 var date = x['snippet']['publishedAt']
-                responseText += title + " - "
-                responseText += new Date(date) + "\n\n"
+                // responseText += title + " - "
+                // responseText += new Date(date) + "\n\n"
+                channelName = document.createElement("h1")
+                channelName.innerHTML = title
+                subDate = document.createElement("a")
+                subDate.innerHTML = date
+                document.querySelector("body").appendChild(channelName)
+                document.querySelector("body").appendChild(subDate)
             }
+            foundChannels += jsoned['items'].length
+            document.querySelector("#progress").innerHTML = `${foundChannels} / ${totalSubs}`
+
             if ("nextPageToken" in jsoned) {
                 pageToken = "&pageToken=" + jsoned['nextPageToken']
             } else {
@@ -45,11 +56,11 @@ async function getResponse() {
             }
 
         }
-        var myblob = new Blob([responseText], {
-            type: 'text/plain;charset=utf8'
-        });
-        var blobUrl = URL.createObjectURL(myblob);
-        window.open(blobUrl)
+        // var myblob = new Blob([responseText], {
+        //     type: 'text/plain;charset=utf8'
+        // });
+        // var blobUrl = URL.createObjectURL(myblob);
+        // window.open(blobUrl)
     }
 }
 
