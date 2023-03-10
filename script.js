@@ -22,7 +22,7 @@ async function getResponse() {
         var responseText = ""
         var foundChannels = 0
         document.querySelector("#channels").innerHTML = ""
-
+        const elements = new Set();
         while (running == true) {
             var url = "https://content-youtube.googleapis.com/youtube/v3/subscriptions?channelId=UCJ8IcSP4kUl8VTedFlHkM4A&part=contentDetails%2C%20snippet&maxResults=50"
             if (pageToken != "") {
@@ -39,7 +39,7 @@ async function getResponse() {
 
             
             const template = document.getElementById("li_template");
-            const elements = new Set();
+            
             for (var x of jsoned['items']) {
                 var title = x['snippet']['title']
                 var date = x['snippet']['publishedAt']
@@ -68,7 +68,15 @@ async function getResponse() {
                 // document.querySelector("body").appendChild(subDate)
             }
 
-            document.querySelector("ul").append(...elements);
+            function elemToDate(elem){
+                return new Date(elem.querySelector(".channelDate").textContent)
+            }
+
+            var sortedElements = Array.from(elements).sort((a, b) => {
+                return elemToDate(a) - elemToDate(b)
+            });
+            var sortedSet = new Set(sortedElements);
+            document.querySelector("ul").append(...sortedSet);
 
             foundChannels += jsoned['items'].length
             document.querySelector("#progress").innerHTML = `${foundChannels} / ${totalSubs}`
