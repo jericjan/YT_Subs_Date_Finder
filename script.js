@@ -44,7 +44,7 @@ async function getResponse() {
                 var title = x['snippet']['title']
                 var date = x['snippet']['publishedAt']
                 var pfp = x['snippet']['thumbnails']['default']['url']
-                var channelID = x['snippet']['channelId']
+                var channelID = x['snippet']['resourceId']['channelId']
                 // responseText += title + " - "
                 // responseText += new Date(date) + "\n\n"
 
@@ -55,7 +55,7 @@ async function getResponse() {
                 element.querySelector(".pfpDiv > .pfp").src = pfp;
                 element.querySelector(".channelContainer").href = "https://www.youtube.com/channel/" + channelID
                 element.querySelector(".channelContainer").target = "_blank"
-                
+
                 elements.add(element);
                 
 
