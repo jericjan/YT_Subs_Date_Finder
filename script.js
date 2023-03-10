@@ -21,6 +21,8 @@ async function getResponse() {
         var pageToken = ""
         var responseText = ""
         var foundChannels = 0
+        document.querySelector("#channels").innerHTML = ""
+        
         while (running == true) {
             var url = "https://content-youtube.googleapis.com/youtube/v3/subscriptions?channelId=UCJ8IcSP4kUl8VTedFlHkM4A&part=contentDetails%2C%20snippet&maxResults=50"
             if (pageToken != "") {
@@ -35,7 +37,7 @@ async function getResponse() {
             var jsoned = await response.json()
             var totalSubs = jsoned['pageInfo']['totalResults']
 
-            document.querySelector("#channels").innerHTML = ""
+            
             const template = document.getElementById("li_template");
             const elements = new Set();
             for (var x of jsoned['items']) {
