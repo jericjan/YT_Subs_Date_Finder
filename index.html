@@ -1,12 +1,13 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
 
   <title>YT Subs Date Finder</title>
   <meta name="description" content="Find when you subbed to someone on YT!">
-  <script src="https://accounts.google.com/gsi/client" ></script>  
+  <script src="https://accounts.google.com/gsi/client"></script>
   <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,6 +15,20 @@
   <button id="authorizeButton">Authorize</button>
   <button id="getSubsButton">Get Subs</button>
   <a id="progress"></a>
-  <script src="script.js" ></script>  
+  <template id="li_template">
+    <li>
+      <a class="channelContainer">
+        <div class="pfpDiv"><img class="pfp"></div>
+        <div class="channelContents">
+          <h3 class="channelTitle">Channel Name</h3>
+          <p class="channelDate">Subbed Date</p>
+        </div>
+      </a>
+    </li>
+  </template>
+  <ul id="channels"></ul>
+
+  <script src="script.js"></script>
 </body>
+
 </html>

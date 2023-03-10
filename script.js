@@ -14,7 +14,7 @@ document.querySelector('#authorizeButton').onclick = function () {
 
 async function getResponse() {
     if (window.yt_access_token == "") {
-        alert("YOu have authorized yet lmao")
+        alert("You have not authorized yet lmao")
     } else {
 
         var running = true
@@ -34,18 +34,38 @@ async function getResponse() {
             })
             var jsoned = await response.json()
             var totalSubs = jsoned['pageInfo']['totalResults']
+
+            document.querySelector("#channels").innerHTML = ""
+            const template = document.getElementById("li_template");
+            const elements = new Set();
             for (var x of jsoned['items']) {
                 var title = x['snippet']['title']
                 var date = x['snippet']['publishedAt']
+                var pfp = x['snippet']['thumbnails']['default']['url']
+                var channelID = x['snippet']['channelId']
                 // responseText += title + " - "
                 // responseText += new Date(date) + "\n\n"
-                channelName = document.createElement("h1")
-                channelName.innerHTML = title
-                subDate = document.createElement("a")
-                subDate.innerHTML = date
-                document.querySelector("body").appendChild(channelName)
-                document.querySelector("body").appendChild(subDate)
+
+                var element = template.content.firstElementChild.cloneNode(true);
+
+                element.querySelector(".channelTitle").textContent = title;
+                element.querySelector(".channelDate").textContent = new Date(date);
+                element.querySelector(".pfpDiv > pfp").src = pfp;
+                element.querySelector(".channelContainer.").href = "https://www.youtube.com/channel/" + channelID
+                elements.add(element);
+                
+
+
+                // channelName = document.createElement("h1")
+                // channelName.innerHTML = title
+                // subDate = document.createElement("a")
+                // subDate.innerHTML = new Date(date)
+                // document.querySelector("body").appendChild(channelName)
+                // document.querySelector("body").appendChild(subDate)
             }
+
+            document.querySelector("ul").append(...elements);
+
             foundChannels += jsoned['items'].length
             document.querySelector("#progress").innerHTML = `${foundChannels} / ${totalSubs}`
 
