@@ -24,7 +24,7 @@ async function getResponse(forChannelID) {
         document.querySelector("#channels").innerHTML = ""
         const elements = new Set();
         while (running == true) {
-            var url = "https://content-youtube.googleapis.com/youtube/v3/subscriptions?channelId=UCJ8IcSP4kUl8VTedFlHkM4A&part=contentDetails%2C%20snippet"
+            var url = "https://content-youtube.googleapis.com/youtube/v3/subscriptions?channelId=UCJ8IcSP4kUl8VTedFlHkM4A&part=contentDetails%2C%20snippet&maxResults=50"
 
             if (forChannelID != undefined){
                 url += "&forChannelId=" + forChannelID
