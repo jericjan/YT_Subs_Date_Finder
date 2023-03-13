@@ -4,12 +4,62 @@ div {
 
 ul {
     list-style-type: none;
+    width: 27vw;
 }
 
 #topDiv {
     background-color: #ffb3b3;
+    border-style: solid;
+    border-color: #b72929;
+    border-radius: 29px;
 }
 
 li {
     background-color: #dbe3ff;
+    padding: 10px;
+    margin: 15px;
+    border-radius: 68px;
+    border-style: solid;
+    border-color: #5b5bc1;
 }
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+body, input, button 
+{font-family: Lexend Deca !important;}
+
+.channelContents > h3, .channelContents > p {
+    color: #11003a;
+}
+
+:link {
+    text-decoration: none;
+}
+
+#authorizeButton {
+    padding: 15px 43px 15px 43px;
+    color: white;
+    background-color: #cd1010;
+    border-radius: 38px;
+}
+
+button {
+    padding: 9px;
+    background-color: #cadcf9;
+    border-radius: 8px;
+}
+
+#searchChannelsBtn {
+    margin-top: 12px;
+}
+
+img.pfp {border-radius: 17px;}
+
+#progress {margin: 8px;display: block;}
+
+#channelSearchBar {width: 255px;text-align: center;}
